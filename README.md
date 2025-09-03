@@ -1,104 +1,128 @@
-# NEURAX - Akcelerator neuronskih mreža na DE1-SoC platformi
+# NEURAX - Neural Network Accelerator for DE1-SoC Platform
 
-## Pregled
+## Quick Start
 
-NEURAX je napredni akcelerator neuronskih mreža dizajniran za DE1-SoC platformu koja kombinuje ARM Cortex-A9 procesor (HPS) sa Cyclone V FPGA. Sistem omogućava efikasno izvršavanje inferecije neuronskih mreža kroz hardware akceleraciju ključnih operacija.
+### Automatic Setup (Recommended)
+```bash
+# One-command setup (installs dependencies and builds everything)
+./setup.sh
 
-## Arhitektura
+# Or step by step:
+make install-deps  # Install system dependencies
+make all           # Build everything
+```
 
-### Hardware komponente
-- **FPGA Akcelerator**: Konfigurabilni akcelerator sa tri glavna bloka
-  - 2D Konvolucijski blok
-  - Aktivacioni blok (ReLU, Tanh, Sigmoid)
-  - Pooling blok (Max/Average)
-- **DMA kontroler**: Za efikasan prenos podataka
-- **Registarski interfejs**: Avalon-MM/AXI-Lite za konfiguraciju
+### Manual Dependency Installation
+```bash
+# Ubuntu/Debian
+sudo apt-get install build-essential libjpeg-dev libv4l-dev v4l2-utils
 
-### Software komponente
-- **NEURAX biblioteka**: C/C++ API za korišćenje akceleratora
-- **Drajveri**: Linux kernel moduli za komunikaciju sa FPGA
-- **Pomoćne biblioteke**: Predprocesiranje, postprocesiranje slike
-- **Demo aplikacije**: Primeri korišćenja za različite NN zadatke
+# Fedora/CentOS
+sudo dnf install gcc gcc-c++ libjpeg-turbo-devel libv4l-devel v4l-utils
 
-## Struktura projekta
+# Arch Linux
+sudo pacman -S base-devel libjpeg-turbo v4l-utils
+```
+
+## Overview
+
+NEURAX is an advanced neural network accelerator designed for the DE1-SoC platform that combines an ARM Cortex-A9 processor (HPS) with a Cyclone V FPGA. The system enables efficient neural network inference execution through hardware acceleration of key operations.
+
+## Architecture
+
+### Hardware Components
+- **FPGA Accelerator**: Configurable accelerator with three main blocks
+  - 2D Convolution block
+  - Activation block (ReLU, Tanh, Sigmoid)
+  - Pooling block (Max/Average)
+- **DMA Controller**: For efficient data transfer
+- **Register Interface**: Avalon-MM/AXI-Lite for configuration
+
+### Software Components
+- **NEURAX Library**: C/C++ API for using the accelerator
+- **Drivers**: Linux kernel modules for FPGA communication
+- **Utility Libraries**: Image preprocessing, postprocessing
+- **Demo Applications**: Usage examples for various NN tasks
+
+## Project Structure
 
 ```
 neurax/
-├── hardware/           # FPGA design fajlovi
-│   ├── fpga/          # Verilog/VHDL implementacija
-│   └── qsys/          # QSys sistem integracija
-├── software/          # Software komponente
-│   ├── lib/           # NEURAX biblioteka
-│   ├── drivers/       # Kernel drajveri
-│   └── utils/         # Pomoćne biblioteke
-├── demo/              # Demo aplikacije
+├── hardware/           # FPGA design files
+│   ├── fpga/          # Verilog/VHDL implementation
+│   └── qsys/          # QSys system integration
+├── software/          # Software components
+│   ├── lib/           # NEURAX library
+│   ├── drivers/       # Kernel drivers
+│   └── utils/         # Utility libraries
+├── demo/              # Demo applications
 ├── tests/             # Test suite
-└── docs/              # Dokumentacija
+└── docs/              # Documentation
 
 ```
 
-## Ključne karakteristike
+## Key Features
 
-- **Konfigurabilnost**: Svi blokovi se mogu nezavisno konfigurisati
-- **Fleksibilnost**: Podrška za 8-bit i 16-bit podatke
-- **Standardni interfejsi**: Avalon-ST, AXI-Stream za podatke
-- **Optimizacija**: Paralelizacija i pipeline obrada
-- **Skalabilnost**: Modularni dizajn za lako proširivanje
+- **Configurability**: All blocks can be independently configured
+- **Flexibility**: Support for 8-bit and 16-bit data
+- **Standard Interfaces**: Avalon-ST, AXI-Stream for data
+- **Optimization**: Parallelization and pipeline processing
+- **Scalability**: Modular design for easy expansion
 
-## Specifikacije FPGA akceleratora
+## FPGA Accelerator Specifications
 
-### Konvolucijski blok
-- Konfigurabilne dimenzije kernela (do 11x11)
-- Podrška za različite stride vrednosti
-- Optimizovan za 2D konvoluciju
+### Convolution Block
+- Configurable kernel dimensions (up to 11x11)
+- Support for different stride values
+- Optimized for 2D convolution
 
-### Aktivacioni blok
+### Activation Block
 - ReLU (Rectified Linear Unit)
 - Tanh (Hyperbolic tangent)
 - Sigmoid
-- Runtime selekcija funkcije
+- Runtime function selection
 
-### Pooling blok
+### Pooling Block
 - Max pooling
 - Average pooling
-- Konfigurabilne dimenzije prozora
+- Configurable window dimensions
 
-## Instalacija i pokretanje
+## Installation and Usage
 
-### Preduslov
-- Intel Quartus Prime (za FPGA synthesis)
-- Altera SoC EDS (za software development)
+### Prerequisites
+- Intel Quartus Prime (for FPGA synthesis)
+- Altera SoC EDS (for software development)
 - Linux kernel headers
-- OpenCV (za image processing)
+- OpenCV (for image processing)
 
-### Build process
+### Build Process
 ```bash
 # Clone repository
 git clone <repository-url>
 cd neurax
 
-# Build hardware
-make hardware
+# Install dependencies
+make install-deps
 
 # Build software
 make software
 
-# Run tests
-make test
+# Build demo applications
+make demo
 ```
 
-## Dokumentacija
+## Documentation
 
-Detaljnu dokumentaciju možete pronaći u `docs/` direktorijumu:
-- Arhitektura sistema
-- API referenca
-- Tutorial za korišćenje
-- Hardware specifikacije
+Detailed documentation can be found in the `docs/` directory:
+- System architecture
+- API reference
+- Usage tutorial
+- Hardware specifications
 
-## Licenca
+## License
 
-[Dodati informacije o licenci]
+[Add license information]
 
-## Kontakt
+## Contact
 
-[Dodati kontakt informacije]
+[Add contact information]

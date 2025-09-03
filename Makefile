@@ -11,7 +11,7 @@ CC = $(CROSS_COMPILE)gcc
 CXX = $(CROSS_COMPILE)g++
 
 # Build targets
-.PHONY: all clean software demo help
+.PHONY: all clean software demo help install install-deps
 
 all: software demo
 
@@ -19,11 +19,12 @@ help:
 	@echo "NEURAX Build System"
 	@echo "=================="
 	@echo "Available commands:"
-	@echo "  make all        - Build complete system"
-	@echo "  make software   - Build software libraries"
-	@echo "  make demo       - Build demo applications"
-	@echo "  make clean      - Clean build artifacts"
-	@echo "  make install    - Install to target system"
+	@echo "  make install-deps - Install required system dependencies"
+	@echo "  make all          - Build complete system"
+	@echo "  make software     - Build software libraries"
+	@echo "  make demo         - Build demo applications"
+	@echo "  make clean        - Clean build artifacts"
+	@echo "  make install      - Install to target system"
 
 # Software build
 software:
@@ -47,6 +48,11 @@ install: all
 	cp $(DEMO_DIR)/bin/* /usr/local/bin/
 	# Update library cache
 	ldconfig
+
+# Install system dependencies
+install-deps:
+	@echo "Installing system dependencies..."
+	./install-deps.sh
 
 # Clean all build artifacts
 clean:
